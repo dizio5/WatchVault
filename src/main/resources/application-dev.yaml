@@ -1,0 +1,9 @@
+spring:
+  jpa:
+
+    hibernate:
+      ddl-auto: update
+
+tmdb:
+  base-url: ${TMDB_BASE_URL}
+  token: ${TMDB_TOKEN}
