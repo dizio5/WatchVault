@@ -1,0 +1,6 @@
+package com.dizio1.watchvault.movie.adapters.out.tmdb.dto;
+
+import java.util.List;
+
+public record SearchMoviesIdResult(List<MovieId> results) {
+}
