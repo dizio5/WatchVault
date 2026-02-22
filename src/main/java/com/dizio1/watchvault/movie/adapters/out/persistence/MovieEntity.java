@@ -1,24 +1,40 @@
-package com.dizio1.watchvault.movie.domain;
+package com.dizio1.watchvault.movie.adapters.out.persistence;
+
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class Movie {
+@Entity
+@Table(name = "movies")
+public class MovieEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String originalTitle;
+
+    @Column(nullable = false)
     private String overview;
-    private int runtime;
+
+    @Column(nullable = false)
+    private Integer runtime;
+
+    @Column(nullable = false)
     private LocalDate releaseDate;
-    private boolean adult;
-    private List<Genre> genres;
+
+    @Column(nullable = false)
+    private Boolean adult;
+
+    @OneToMany(mappedBy = "movie",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<GenreEntity> genres;
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getOriginalTitle() {
@@ -37,11 +53,11 @@ public class Movie {
         this.overview = overview;
     }
 
-    public int getRuntime() {
+    public Integer getRuntime() {
         return runtime;
     }
 
-    public void setRuntime(int runtime) {
+    public void setRuntime(Integer runtime) {
         this.runtime = runtime;
     }
 
@@ -53,19 +69,19 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    public boolean isAdult() {
+    public Boolean getAdult() {
         return adult;
     }
 
-    public void setAdult(boolean adult) {
+    public void setAdult(Boolean adult) {
         this.adult = adult;
     }
 
-    public List<Genre> getGenres() {
+    public List<GenreEntity> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(List<GenreEntity> genres) {
         this.genres = genres;
     }
 }

@@ -1,7 +1,8 @@
-package com.dizio1.watchvault.movie.adapters.out;
+package com.dizio1.watchvault.movie.adapters.out.tmdb;
 
 import com.dizio1.watchvault.movie.application.ports.out.MovieCatalogPort;
-import com.dizio1.watchvault.movie.adapters.out.dto.SearchMoviesResult;
+import com.dizio1.watchvault.movie.adapters.out.tmdb.dto.SearchMoviesIdResult;
+import com.dizio1.watchvault.movie.domain.Movie;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -15,7 +16,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
     }
 
     @Override
-    public SearchMoviesResult searchMovie(String query) {
+    public SearchMoviesIdResult searchMovieId(String query) {
         return tmdb.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/search/movie")
@@ -23,6 +24,15 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
                         .queryParam("include_adult", true)
                         .build())
                 .retrieve()
-                .body(SearchMoviesResult.class);
+                .body(SearchMoviesIdResult.class);
     }
+
+    @Override
+    public Movie getMovieDetails(Long id) {
+        return tmdb.get()
+                .uri("/movie/{id}", id)
+                .retrieve()
+                .body(Movie.class);
+    }
+
 }
