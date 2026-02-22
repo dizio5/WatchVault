@@ -1,7 +1,7 @@
-package com.dizio1.watchvault.movie.adapters.out.persistence;
+package com.dizio1.watchvault.movie.infraestructure.out.persistence;
 
 import com.dizio1.watchvault.movie.application.ports.out.MovieRepository;
-import com.dizio1.watchvault.movie.domain.Movie;
+import com.dizio1.watchvault.movie.domain.model.Movie;
 
 import java.util.Optional;
 

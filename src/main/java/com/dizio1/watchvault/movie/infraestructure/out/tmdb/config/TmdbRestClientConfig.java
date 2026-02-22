@@ -1,4 +1,4 @@
-package com.dizio1.watchvault.config;
+package com.dizio1.watchvault.movie.infraestructure.out.tmdb.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
 
 @Configuration
-public class RestClientConfig {
+public class TmdbRestClientConfig {
 
     @Bean
     RestClient tmdbRestClient(
