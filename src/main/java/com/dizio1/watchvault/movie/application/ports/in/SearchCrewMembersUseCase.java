@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface SearchCrewMembersUseCase {
 
-    List<CrewMember> getCrewMembers(String movieName);
+    List<CrewMember> getCrewMembers(String name);
 }

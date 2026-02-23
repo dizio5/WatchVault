@@ -1,4 +1,4 @@
-package com.dizio1.watchvault.movie.infraestructure.in.web;
+package com.dizio1.watchvault.movie.infraestructure.in.web.dto;
 
 import com.dizio1.watchvault.movie.domain.model.Genre;
 

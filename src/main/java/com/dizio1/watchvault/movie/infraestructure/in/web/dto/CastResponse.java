@@ -1,7 +1,6 @@
-package com.dizio1.watchvault.movie.domain.model;
+package com.dizio1.watchvault.movie.infraestructure.in.web.dto;
 
-public record CastMember(
-        Long id,
+public record CastResponse(
         String name,
         Boolean adult,
         Integer gender,

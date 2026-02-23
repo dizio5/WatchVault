@@ -5,9 +5,9 @@ import com.dizio1.watchvault.movie.domain.model.CastMember;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CastMapper {
+public class TmdbCastMapper {
 
-    public CastMember fromResponseToModel(SearchCastDTO response) {
+    public CastMember toModel(SearchCastDTO response) {
         return new CastMember(
                 response.id(),
                 response.name(),
