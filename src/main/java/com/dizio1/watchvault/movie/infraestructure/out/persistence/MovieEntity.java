@@ -1,4 +1,4 @@
-package com.dizio1.watchvault.movie.adapters.out.persistence;
+package com.dizio1.watchvault.movie.infraestructure.out.persistence;
 
 import jakarta.persistence.*;
 

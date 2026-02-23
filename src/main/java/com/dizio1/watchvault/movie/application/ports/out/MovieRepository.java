@@ -1,6 +1,6 @@
 package com.dizio1.watchvault.movie.application.ports.out;
 
-import com.dizio1.watchvault.movie.domain.Movie;
+import com.dizio1.watchvault.movie.domain.model.Movie;
 
 import java.util.Optional;
 

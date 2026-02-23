@@ -1,6 +1,6 @@
-package com.dizio1.watchvault.movie.adapters.out.persistence;
+package com.dizio1.watchvault.movie.infraestructure.out.persistence;
 
-import com.dizio1.watchvault.movie.domain.Movie;
+import com.dizio1.watchvault.movie.domain.model.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

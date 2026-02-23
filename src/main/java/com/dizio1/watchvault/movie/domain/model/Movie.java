@@ -1,4 +1,4 @@
-package com.dizio1.watchvault.movie.domain;
+package com.dizio1.watchvault.movie.domain.model;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,8 +6,9 @@ import java.util.List;
 public class Movie {
 
     private Long id;
-    private String originalTitle;
+    private String title;
     private String overview;
+    private String directedBy;
     private int runtime;
     private LocalDate releaseDate;
     private boolean adult;
@@ -21,12 +22,12 @@ public class Movie {
         this.id = id;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getOverview() {
@@ -67,5 +68,13 @@ public class Movie {
 
     public void setGenres(List<Genre> genres) {
         this.genres = genres;
+    }
+
+    public String getDirectedBy() {
+        return directedBy;
+    }
+
+    public void setDirectedBy(String directedBy) {
+        this.directedBy = directedBy;
     }
 }
