@@ -1,0 +1,19 @@
+package com.dizio1.watchvault.review.application.usecase;
+
+import com.dizio1.watchvault.review.application.ports.in.WriteReviewUseCase;
+import com.dizio1.watchvault.review.application.ports.out.ReviewRepositoryPort;
+import com.dizio1.watchvault.review.domain.Review;
+
+public class WriteReviewUseCaseImpl implements WriteReviewUseCase {
+
+    private final ReviewRepositoryPort reviewRepository;
+
+    public WriteReviewUseCaseImpl(ReviewRepositoryPort reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
+
+    @Override
+    public Review review(Review review) {
+        return reviewRepository.save(review);
+    }
+}

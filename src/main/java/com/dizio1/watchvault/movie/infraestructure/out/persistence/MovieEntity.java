@@ -32,13 +32,12 @@ public class MovieEntity {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movies_genres",
-    joinColumns = @JoinColumn(name = "movie_id"),
-    inverseJoinColumns = @JoinColumn(name = "genre_id"))
+        joinColumns = @JoinColumn(name = "movie_id"),
+        inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<GenreEntity> genres = new HashSet<>();
 
     public void addGenre(GenreEntity genre) {
         genres.add(genre);
-        genre.setMovie(this);
     }
 
     public Long getId() {
