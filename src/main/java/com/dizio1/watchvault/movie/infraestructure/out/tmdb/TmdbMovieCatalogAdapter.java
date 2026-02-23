@@ -2,7 +2,7 @@ package com.dizio1.watchvault.movie.infraestructure.out.tmdb;
 
 import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.*;
 import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.mapper.CastMapper;
-import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.mapper.MovieMapper;
+import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.mapper.TmdbMovieMapper;
 import com.dizio1.watchvault.movie.application.ports.out.MovieCatalogPort;
 import com.dizio1.watchvault.movie.domain.exception.MovieNotFoundException;
 import com.dizio1.watchvault.movie.domain.model.CastMember;
@@ -18,19 +18,19 @@ import java.util.Objects;
 public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
 
     private final RestClient tmdb;
-    private final MovieMapper movieMapper;
+    private final TmdbMovieMapper tmdbMovieMapper;
     private final CastMapper castMapper;
 
     public TmdbMovieCatalogAdapter(RestClient restClient,
-                                   MovieMapper movieMapper,
+                                   TmdbMovieMapper tmdbMovieMapper,
                                    CastMapper castMapper) {
         this.tmdb = restClient;
-        this.movieMapper = movieMapper;
+        this.tmdbMovieMapper = tmdbMovieMapper;
         this.castMapper = castMapper;
     }
 
     @Override
-    public SearchMoviesIdResult searchMovieId(String query) {
+    public Long searchMovieId(String query) {
         SearchMoviesIdResult response = tmdb.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/search/movie")
@@ -42,7 +42,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
         if (response == null) {
             throw new MovieNotFoundException(query);
         }
-        return response;
+        return response.results().getFirst().id();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
                 .uri("/movie/{id}", id)
                 .retrieve()
                 .body(TmdbMovieResponse.class);
-        return movieMapper.fromResponseToModel(Objects.requireNonNull(response));
+        return tmdbMovieMapper.fromResponseToModel(Objects.requireNonNull(response));
     }
 
     @Override

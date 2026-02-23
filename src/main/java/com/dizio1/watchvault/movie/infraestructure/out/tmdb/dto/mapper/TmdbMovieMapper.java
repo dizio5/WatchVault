@@ -1,11 +1,12 @@
 package com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.mapper;
 
+import com.dizio1.watchvault.movie.infraestructure.in.web.MovieResponse;
 import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.TmdbMovieResponse;
 import com.dizio1.watchvault.movie.domain.model.Movie;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MovieMapper {
+public class TmdbMovieMapper {
 
     public Movie fromResponseToModel(TmdbMovieResponse response) {
         Movie movie = new Movie();
