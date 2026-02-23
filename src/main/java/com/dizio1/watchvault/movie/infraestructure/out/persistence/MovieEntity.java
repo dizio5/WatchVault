@@ -3,7 +3,8 @@ package com.dizio1.watchvault.movie.infraestructure.out.persistence;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "movies")
@@ -28,13 +29,24 @@ public class MovieEntity {
     @Column(nullable = false)
     private Boolean adult;
 
-    @OneToMany(mappedBy = "movie",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<GenreEntity> genres;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "movies_genres",
+    joinColumns = @JoinColumn(name = "movie_id"),
+    inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private Set<GenreEntity> genres = new HashSet<>();
+
+    public void addGenre(GenreEntity genre) {
+        genres.add(genre);
+        genre.setMovie(this);
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getOriginalTitle() {
@@ -77,11 +89,11 @@ public class MovieEntity {
         this.adult = adult;
     }
 
-    public List<GenreEntity> getGenres() {
+    public Set<GenreEntity> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<GenreEntity> genres) {
+    public void setGenres(Set<GenreEntity> genres) {
         this.genres = genres;
     }
 }
