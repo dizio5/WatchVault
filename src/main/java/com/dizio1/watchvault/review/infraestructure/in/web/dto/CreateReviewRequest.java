@@ -1,9 +1,13 @@
 package com.dizio1.watchvault.review.infraestructure.in.web.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public record CreateReviewRequest(
-        String showType,
-        String show,
+        @NotBlank String showType,
+        @NotBlank String title,
         String description,
-        Integer stars
+        @Min(1) @Max(10) Integer stars
 ) {
 }

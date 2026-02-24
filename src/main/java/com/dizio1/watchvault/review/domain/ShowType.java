@@ -1,16 +1,19 @@
 package com.dizio1.watchvault.review.domain;
 
+import java.util.Arrays;
+
 public enum ShowType {
 
-    SERIES,
-    MOVIE,
-    ANIME;
+    SERIES("Series"),
+    MOVIE("Movie"),
+    ANIME("Anime");
+
+    ShowType(String name) {}
 
     public static ShowType from(String value) {
-        try {
-            return ShowType.valueOf(value.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        }
+        return Arrays.stream(ShowType.values())
+                .filter(t -> t.name().equalsIgnoreCase(value))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

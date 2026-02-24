@@ -12,7 +12,7 @@ public class RestReviewMapper {
         review.setDescription(request.description());
         review.setStars(request.stars());
         review.setShowType(ShowType.from(request.showType()));
-        review.setTitle(request.show());
+        review.setTitle(request.title());
         return review;
     }
 
