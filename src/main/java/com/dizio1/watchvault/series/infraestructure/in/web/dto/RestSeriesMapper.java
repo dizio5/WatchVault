@@ -5,6 +5,9 @@ import com.dizio1.watchvault.series.domain.model.Series;
 import com.dizio1.watchvault.series.infraestructure.out.tmdb.dto.TmdbSeriesSearchResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Optional;
+
 @Component
 public class RestSeriesMapper {
 
@@ -20,7 +23,13 @@ public class RestSeriesMapper {
         series.setId(response.id());
         series.setAdult(response.adult());
         series.setDescription(response.overview());
-        series.setCreatedBy(response.createdBy().getFirst().name());
+        String creator = Optional.ofNullable(response.createdBy())
+                .stream()
+                .flatMap(List::stream)
+                .map(TmdbSeriesSearchResponse.TmdbCreatorDto::name)
+                .findFirst()
+                .orElse(null);
+        series.setCreatedBy(creator);
         series.setGenres(response.genres());
         series.setSeasons(response.numberOfSeasons());
         series.setEpisodes(response.numberOfEpisodes());
