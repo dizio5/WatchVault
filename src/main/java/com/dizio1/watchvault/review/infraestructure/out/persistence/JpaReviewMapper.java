@@ -9,6 +9,7 @@ public class JpaReviewMapper {
     public ReviewEntity fromModelToEntity(Review review) {
         ReviewEntity reviewEntity = new ReviewEntity();
         reviewEntity.setTitle(review.getTitle());
+        reviewEntity.setShowId(review.getShowId());
         reviewEntity.setReviewedAt(review.getReviewedAt());
         reviewEntity.setShowType(review.getShowType());
         reviewEntity.setId(review.getId());
@@ -20,6 +21,7 @@ public class JpaReviewMapper {
     public Review fromEntitytoModel(ReviewEntity entity) {
         Review review = new Review();
         review.setId(entity.getId());
+        review.setShowId(entity.getShowId());
         review.setDescription(entity.getDescription());
         review.setShowType(entity.getShowType());
         review.setTitle(entity.getTitle());

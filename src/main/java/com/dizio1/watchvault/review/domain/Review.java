@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Review {
 
     private Long id;
+    private Long showId;
     private ShowType showType;
     private String title;
     private String description;
@@ -17,6 +18,14 @@ public class Review {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getShowId() {
+        return showId;
+    }
+
+    public void setShowId(Long showId) {
+        this.showId = showId;
     }
 
     public LocalDate getReviewedAt() {

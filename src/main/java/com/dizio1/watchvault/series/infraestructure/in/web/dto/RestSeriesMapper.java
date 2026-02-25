@@ -22,7 +22,7 @@ public class RestSeriesMapper {
         series.setTitle(response.name());
         series.setId(response.id());
         series.setAdult(response.adult());
-        series.setDescription(response.overview());
+        series.setOverview(response.overview());
         String creator = Optional.ofNullable(response.createdBy())
                 .stream()
                 .flatMap(List::stream)
@@ -41,7 +41,7 @@ public class RestSeriesMapper {
 
     public SeriesResponse toResponse(Series series) {
         return new SeriesResponse(series.getTitle(),
-                series.getDescription(),
+                series.getOverview(),
                 series.getCreatedBy(),
                 series.getEpisodes(),
                 series.getSeasons(),

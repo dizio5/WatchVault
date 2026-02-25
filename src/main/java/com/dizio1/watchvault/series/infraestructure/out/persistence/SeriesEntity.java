@@ -1,15 +1,21 @@
-package com.dizio1.watchvault.series.domain.model;
+package com.dizio1.watchvault.series.infraestructure.out.persistence;
 
 import com.dizio1.watchvault.movie.domain.model.Genre;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class Series {
+@Entity
+@Table(name = "series")
+public class SeriesEntity {
 
+    @Id
     private Long id;
     private String title;
-    private String overview;
+    private String description;
     private String createdBy;
     private Integer episodes;
     private Integer seasons;
@@ -35,12 +41,12 @@ public class Series {
         this.title = title;
     }
 
-    public String getOverview() {
-        return overview;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCreatedBy() {

@@ -12,6 +12,9 @@ public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
+    private Long showId;
+    @Enumerated(EnumType.STRING)
     private ShowType showType;
     private String title;
     private String description;
@@ -24,6 +27,14 @@ public class ReviewEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getShowId() {
+        return showId;
+    }
+
+    public void setShowId(Long showId) {
+        this.showId = showId;
     }
 
     public LocalDate getReviewedAt() {
