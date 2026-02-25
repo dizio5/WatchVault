@@ -44,7 +44,7 @@ public class MovieController {
     }
 
     @GetMapping("/search")
-    public MovieResponse getMovieId(@RequestParam String name) {
+    public MovieResponse getMovieDetails(@RequestParam String name) {
         Movie movie = searchMovieUseCase.getMovieDetails(name);
         return movieMapper.fromModelToResponse(movie);
     }
