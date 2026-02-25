@@ -10,9 +10,10 @@ public class JpaReviewMapper {
         ReviewEntity reviewEntity = new ReviewEntity();
         reviewEntity.setTitle(review.getTitle());
         reviewEntity.setReviewedAt(review.getReviewedAt());
+        reviewEntity.setShowType(review.getShowType());
         reviewEntity.setId(review.getId());
-        reviewEntity.setStars(review.getStars());
-        reviewEntity.setDescription(reviewEntity.getDescription());
+        reviewEntity.setRating(review.getRating());
+        reviewEntity.setDescription(review.getDescription());
         return reviewEntity;
     }
 
@@ -20,8 +21,9 @@ public class JpaReviewMapper {
         Review review = new Review();
         review.setId(entity.getId());
         review.setDescription(entity.getDescription());
+        review.setShowType(entity.getShowType());
         review.setTitle(entity.getTitle());
-        review.setStars(entity.getStars());
+        review.setRating(entity.getRating());
         review.setReviewedAt(entity.getReviewedAt());
         return review;
     }

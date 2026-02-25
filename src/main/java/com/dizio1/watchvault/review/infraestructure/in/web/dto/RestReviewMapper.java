@@ -10,17 +10,17 @@ public class RestReviewMapper {
     public Review toModel(CreateReviewRequest request) {
         Review review = new Review();
         review.setDescription(request.description());
-        review.setStars(request.stars());
+        review.setRating(request.rating());
         review.setShowType(ShowType.from(request.showType()));
         review.setTitle(request.title());
         return review;
     }
 
     public ReviewResponse toResponse(Review review) {
-        return new ReviewResponse(review.getShowType(),
+        return new ReviewResponse(review.getShowType().getName(),
                 review.getTitle(),
                 review.getDescription(),
-                review.getStars(),
+                review.getRating(),
                 review.getReviewedAt());
     }
 }

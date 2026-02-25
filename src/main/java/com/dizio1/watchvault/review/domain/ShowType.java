@@ -8,7 +8,15 @@ public enum ShowType {
     MOVIE("Movie"),
     ANIME("Anime");
 
-    ShowType(String name) {}
+    private final String name;
+
+    ShowType(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 
     public static ShowType from(String value) {
         return Arrays.stream(ShowType.values())

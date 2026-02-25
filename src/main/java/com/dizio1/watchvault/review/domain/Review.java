@@ -8,7 +8,7 @@ public class Review {
     private ShowType showType;
     private String title;
     private String description;
-    private Integer stars;
+    private Integer rating;
     private LocalDate reviewedAt;
 
     public Long getId() {
@@ -51,11 +51,11 @@ public class Review {
         this.description = description;
     }
 
-    public Integer getStars() {
-        return stars;
+    public Integer getRating() {
+        return rating;
     }
 
-    public void setStars(Integer stars) {
-        this.stars = stars;
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }

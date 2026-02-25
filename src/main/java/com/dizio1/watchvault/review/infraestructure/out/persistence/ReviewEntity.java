@@ -15,7 +15,7 @@ public class ReviewEntity {
     private ShowType showType;
     private String title;
     private String description;
-    private Integer stars;
+    private Integer rating;
     private LocalDate reviewedAt;
 
     public Long getId() {
@@ -58,11 +58,11 @@ public class ReviewEntity {
         this.description = description;
     }
 
-    public Integer getStars() {
-        return stars;
+    public Integer getRating() {
+        return rating;
     }
 
-    public void setStars(Integer stars) {
-        this.stars = stars;
+    public void setRating(Integer stars) {
+        this.rating = stars;
     }
 }
