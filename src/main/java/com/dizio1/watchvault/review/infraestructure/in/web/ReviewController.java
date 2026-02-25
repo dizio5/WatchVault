@@ -24,7 +24,7 @@ public class ReviewController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ReviewResponse review(@RequestBody @Valid CreateReviewRequest request) {
-        Review review = writeReviewUseCase.review(reviewMapper.toModel(request));
+        Review review = writeReviewUseCase.createReview(reviewMapper.toModel(request));
 
         return reviewMapper.toResponse(review);
     }

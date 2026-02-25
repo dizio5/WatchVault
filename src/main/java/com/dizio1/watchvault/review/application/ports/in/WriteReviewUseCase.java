@@ -4,5 +4,5 @@ import com.dizio1.watchvault.review.domain.Review;
 
 public interface WriteReviewUseCase {
 
-    Review review(Review review);
+    Review createReview(Review review);
 }

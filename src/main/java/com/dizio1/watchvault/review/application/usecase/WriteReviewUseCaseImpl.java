@@ -15,7 +15,7 @@ public class WriteReviewUseCaseImpl implements WriteReviewUseCase {
     }
 
     @Override
-    public Review review(Review review) {
+    public Review createReview(Review review) {
         review.setReviewedAt(LocalDate.now());
         return reviewRepository.save(review);
     }

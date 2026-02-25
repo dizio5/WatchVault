@@ -15,8 +15,7 @@ public class SearchCrewMembersUseCaseImpl implements SearchCrewMembersUseCase {
     }
 
     @Override
-    public List<CrewMember> getCrewMembers(String name) {
-        Long id = movieCatalog.searchMovieId(name);
-        return movieCatalog.searchMovieCrewMembers(id);
+    public List<CrewMember> getCrewMembers(String title) {
+        return movieCatalog.searchCrewMembers(title);
     }
 }
