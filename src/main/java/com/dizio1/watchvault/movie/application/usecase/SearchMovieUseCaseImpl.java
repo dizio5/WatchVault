@@ -16,19 +16,17 @@ public class SearchMovieUseCaseImpl implements SearchMovieUseCase {
     }
 
     @Override
-    public Movie getMovieDetails(String name) {
-        Long movieId = movieCatalog.searchMovieId(name);
-
-        CrewMember director = getMovieDirector(movieId)
+    public Movie getMovieDetails(String title) {
+        CrewMember director = getMovieDirector(title)
                 .orElseThrow(() -> new IllegalStateException("Director not found"));
 
-        Movie movie = movieCatalog.getMovieDetails(movieId);
+        Movie movie = movieCatalog.searchByTitle(title);
         movie.setDirectedBy(director.name());
         return movie;
     }
 
-    private Optional<CrewMember> getMovieDirector(Long id) {
-        return movieCatalog.searchMovieCrewMembers(id)
+    private Optional<CrewMember> getMovieDirector(String title) {
+        return movieCatalog.searchCrewMembers(title)
                 .stream()
                 .filter(crewMember -> crewMember.job().equals("Director"))
                 .findFirst();

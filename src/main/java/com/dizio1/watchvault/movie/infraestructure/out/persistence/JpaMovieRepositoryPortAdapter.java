@@ -1,15 +1,15 @@
 package com.dizio1.watchvault.movie.infraestructure.out.persistence;
 
-import com.dizio1.watchvault.movie.application.ports.out.MovieRepository;
+import com.dizio1.watchvault.movie.application.ports.out.MovieRepositoryPort;
 import com.dizio1.watchvault.movie.domain.model.Movie;
 
 import java.util.Optional;
 
-public class JpaMovieRepositoryAdapter implements MovieRepository {
+public class JpaMovieRepositoryPortAdapter implements MovieRepositoryPort {
 
     private final JpaMovieRepository movieRepository;
 
-    public JpaMovieRepositoryAdapter(JpaMovieRepository movieRepository) {
+    public JpaMovieRepositoryPortAdapter(JpaMovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 

@@ -15,8 +15,7 @@ public class SearchCastMembersUseCaseImpl implements SearchCastMembersUseCase {
     }
 
     @Override
-    public List<CastMember> getCastMembers(String name) {
-        Long id = movieCatalog.searchMovieId(name);
-        return movieCatalog.searchMovieCastMembers(id);
+    public List<CastMember> getCastMembers(String title) {
+        return movieCatalog.searchCastMembers(title);
     }
 }

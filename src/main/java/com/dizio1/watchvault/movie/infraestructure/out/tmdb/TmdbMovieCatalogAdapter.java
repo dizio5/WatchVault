@@ -14,6 +14,7 @@ import org.springframework.web.client.RestClient;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
@@ -30,8 +31,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
         this.tmdbCastMapper = tmdbCastMapper;
     }
 
-    @Override
-    public Long searchMovieId(String query) {
+    private Long searchMovieId(String query) {
         SearchMoviesIdResult response = tmdb.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/search/movie")
@@ -40,14 +40,19 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
                         .build())
                 .retrieve()
                 .body(SearchMoviesIdResult.class);
-        if (response == null) {
-            throw new MovieNotFoundException(query);
-        }
-        return response.results().getFirst().id();
+
+        return Optional.ofNullable(response)
+                .map(SearchMoviesIdResult::results)
+                .orElse(List.of())
+                .stream()
+                .map(SearchMoviesIdResult.MovieId::id)
+                .findFirst()
+                .orElseThrow(() -> new MovieNotFoundException(query));
     }
 
     @Override
-    public Movie getMovieDetails(Long id) {
+    public Movie searchByTitle(String title) {
+        Long id = searchMovieId(title);
         TmdbMovieResponse response = tmdb.get()
                 .uri("/movie/{id}", id)
                 .retrieve()
@@ -56,7 +61,8 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
     }
 
     @Override
-    public List<CastMember> searchMovieCastMembers(Long id) {
+    public List<CastMember> searchCastMembers(String title) {
+        Long id = searchMovieId(title);
         SearchCastResult response = tmdb.get()
                 .uri("/movie/{id}/credits", id)
                 .retrieve()
@@ -70,7 +76,8 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
     }
 
     @Override
-    public List<CrewMember> searchMovieCrewMembers(Long id) {
+    public List<CrewMember> searchCrewMembers(String title) {
+        Long id = searchMovieId(title);
         SearchCrewResult response =  tmdb.get()
                 .uri("/movie/{id}/credits", id)
                 .retrieve()
