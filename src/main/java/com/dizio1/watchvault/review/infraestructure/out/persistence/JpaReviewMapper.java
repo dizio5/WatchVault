@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JpaReviewMapper {
 
-    public ReviewEntity fromModelToEntity(Review review) {
+    public ReviewEntity toEntity(Review review) {
         ReviewEntity reviewEntity = new ReviewEntity();
         reviewEntity.setTitle(review.getTitle());
         reviewEntity.setShowId(review.getShowId());
@@ -18,7 +18,7 @@ public class JpaReviewMapper {
         return reviewEntity;
     }
 
-    public Review fromEntitytoModel(ReviewEntity entity) {
+    public Review toModel(ReviewEntity entity) {
         Review review = new Review();
         review.setId(entity.getId());
         review.setShowId(entity.getShowId());

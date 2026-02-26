@@ -2,15 +2,20 @@ package com.dizio1.watchvault.movie.infraestructure.out.persistence;
 
 import com.dizio1.watchvault.movie.application.ports.out.MovieRepositoryPort;
 import com.dizio1.watchvault.movie.domain.model.Movie;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class JpaMovieRepositoryPortAdapter implements MovieRepositoryPort {
 
     private final JpaMovieRepository movieRepository;
+    private final JpaMovieMapper movieMapper;
 
-    public JpaMovieRepositoryPortAdapter(JpaMovieRepository movieRepository) {
+    public JpaMovieRepositoryPortAdapter(JpaMovieRepository movieRepository,
+                                         JpaMovieMapper movieMapper) {
         this.movieRepository = movieRepository;
+        this.movieMapper = movieMapper;
     }
 
     @Override
@@ -20,11 +25,13 @@ public class JpaMovieRepositoryPortAdapter implements MovieRepositoryPort {
 
     @Override
     public Optional<Movie> findById(Long id) {
-        return Optional.empty();
+        return movieRepository.findById(id)
+                .map(movieMapper::toModel);
     }
 
     @Override
     public Optional<Movie> findByTitle(String title) {
-        return Optional.empty();
+        return movieRepository.findByTitle(title)
+                .map(movieMapper::toModel);
     }
 }

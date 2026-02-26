@@ -17,8 +17,8 @@ public class JpaReviewRepositoryAdapter implements ReviewRepositoryPort {
 
     @Override
     public Review save(Review review) {
-        ReviewEntity entity = jpaReviewMapper.fromModelToEntity(review);
+        ReviewEntity entity = jpaReviewMapper.toEntity(review);
         ReviewEntity saved = jpaRepository.save(entity);
-        return jpaReviewMapper.fromEntitytoModel(saved);
+        return jpaReviewMapper.toModel(saved);
     }
 }

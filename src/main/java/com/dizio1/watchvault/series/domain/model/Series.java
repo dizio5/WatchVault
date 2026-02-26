@@ -1,6 +1,6 @@
 package com.dizio1.watchvault.series.domain.model;
 
-import com.dizio1.watchvault.movie.domain.model.Genre;
+import com.dizio1.watchvault.genre.domain.Genre;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -2,7 +2,7 @@ package com.dizio1.watchvault.series.infraestructure.out.tmdb.dto;
 
 import java.util.List;
 
-public record SearchSeriesIdResult(
+public record SearchSeriesIdResponse(
         List<SeriesId> results
 ) {
     public record SeriesId(Long id) {

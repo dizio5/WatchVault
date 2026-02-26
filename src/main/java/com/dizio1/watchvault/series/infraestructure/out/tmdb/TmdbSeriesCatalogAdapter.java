@@ -4,7 +4,7 @@ import com.dizio1.watchvault.series.application.ports.out.SeriesCatalogPort;
 import com.dizio1.watchvault.series.domain.exception.SeriesNotFoundException;
 import com.dizio1.watchvault.series.domain.model.Series;
 import com.dizio1.watchvault.series.infraestructure.in.web.dto.RestSeriesMapper;
-import com.dizio1.watchvault.series.infraestructure.out.tmdb.dto.SearchSeriesIdResult;
+import com.dizio1.watchvault.series.infraestructure.out.tmdb.dto.SearchSeriesIdResponse;
 import com.dizio1.watchvault.series.infraestructure.out.tmdb.dto.TmdbSeriesSearchResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -25,19 +25,19 @@ public class TmdbSeriesCatalogAdapter implements SeriesCatalogPort {
     }
 
     private Long searchSeriesId(String query) {
-        SearchSeriesIdResult result = tmdb.get()
+        SearchSeriesIdResponse result = tmdb.get()
                 .uri(uriBuilder -> uriBuilder.path("/search/tv")
                         .queryParam("query", query)
                         .queryParam("include_adult", true)
                         .build())
                 .retrieve()
-                .body(SearchSeriesIdResult.class);
+                .body(SearchSeriesIdResponse.class);
 
         return Optional.ofNullable(result)
-                .map(SearchSeriesIdResult::results)
+                .map(SearchSeriesIdResponse::results)
                 .orElse(List.of())
                 .stream()
-                .map(SearchSeriesIdResult.SeriesId::id)
+                .map(SearchSeriesIdResponse.SeriesId::id)
                 .findFirst()
                 .orElseThrow(() -> new SeriesNotFoundException(query));
     }

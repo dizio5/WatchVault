@@ -1,10 +1,19 @@
 package com.dizio1.watchvault.series.infraestructure.out.persistence;
 
+import com.dizio1.watchvault.movie.infraestructure.out.persistence.JpaGenreMapper;
 import com.dizio1.watchvault.series.domain.model.Series;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 @Component
 public class JpaSeriesMapper {
+
+    private final JpaGenreMapper genreMapper;
+
+    public JpaSeriesMapper(JpaGenreMapper genreMapper) {
+        this.genreMapper = genreMapper;
+    }
 
     public SeriesEntity toEntity(Series series) {
         SeriesEntity entity = new SeriesEntity();
@@ -14,7 +23,10 @@ public class JpaSeriesMapper {
         entity.setDescription(series.getOverview());
         entity.setSeasons(series.getSeasons());
         entity.setCreatedBy(series.getCreatedBy());
-        entity.setGenres(series.getGenres());
+        entity.setGenres(series.getGenres()
+                .stream()
+                .map(genreMapper::toEntity)
+                .collect(Collectors.toSet()));
         entity.setFirstAirDate(series.getFirstAirDate());
         entity.setLastAirDate(series.getLastAirDate());
         entity.setStatus(series.getStatus());
@@ -27,14 +39,17 @@ public class JpaSeriesMapper {
         series.setId(entity.getId());
         series.setTitle(entity.getTitle());
         series.setEpisodes(entity.getEpisodes());
-        series.setSeasons(entity.getSeasons());
         series.setCreatedBy(entity.getCreatedBy());
-        series.setGenres(entity.getGenres());
+        series.setGenres(entity.getGenres()
+                .stream()
+                .map(genreMapper::toModel)
+                .toList());
         series.setFirstAirDate(entity.getFirstAirDate());
         series.setLastAirDate(entity.getLastAirDate());
         series.setStatus(entity.getStatus());
         series.setAdult(entity.isAdult());
         series.setOverview(entity.getDescription());
+        series.setSeasons(entity.getSeasons());
         return series;
     }
 }

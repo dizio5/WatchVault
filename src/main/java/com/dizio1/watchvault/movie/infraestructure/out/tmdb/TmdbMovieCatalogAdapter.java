@@ -1,13 +1,13 @@
 package com.dizio1.watchvault.movie.infraestructure.out.tmdb;
 
-import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.*;
-import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.mapper.TmdbCastMapper;
-import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.mapper.TmdbMovieMapper;
 import com.dizio1.watchvault.movie.application.ports.out.MovieCatalogPort;
 import com.dizio1.watchvault.movie.domain.exception.MovieNotFoundException;
 import com.dizio1.watchvault.movie.domain.model.CastMember;
 import com.dizio1.watchvault.movie.domain.model.CrewMember;
 import com.dizio1.watchvault.movie.domain.model.Movie;
+import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.*;
+import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.mapper.TmdbCastMapper;
+import com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto.mapper.TmdbMovieMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -32,20 +32,20 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
     }
 
     private Long searchMovieId(String query) {
-        SearchMoviesIdResult response = tmdb.get()
+        SearchMoviesIdResponse response = tmdb.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/search/movie")
                         .queryParam("query", query)
                         .queryParam("include_adult", true)
                         .build())
                 .retrieve()
-                .body(SearchMoviesIdResult.class);
+                .body(SearchMoviesIdResponse.class);
 
         return Optional.ofNullable(response)
-                .map(SearchMoviesIdResult::results)
+                .map(SearchMoviesIdResponse::results)
                 .orElse(List.of())
                 .stream()
-                .map(SearchMoviesIdResult.MovieId::id)
+                .map(SearchMoviesIdResponse.MovieId::id)
                 .findFirst()
                 .orElseThrow(() -> new MovieNotFoundException(query));
     }
@@ -63,10 +63,10 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
     @Override
     public List<CastMember> searchCastMembers(String title) {
         Long id = searchMovieId(title);
-        SearchCastResult response = tmdb.get()
+        SearchCastResponse response = tmdb.get()
                 .uri("/movie/{id}/credits", id)
                 .retrieve()
-                .body(SearchCastResult.class);
+                .body(SearchCastResponse.class);
 
         return Objects.requireNonNull(response).cast()
                 .stream()
@@ -78,10 +78,10 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
     @Override
     public List<CrewMember> searchCrewMembers(String title) {
         Long id = searchMovieId(title);
-        SearchCrewResult response =  tmdb.get()
+        SearchCrewResponse response = tmdb.get()
                 .uri("/movie/{id}/credits", id)
                 .retrieve()
-                .body(SearchCrewResult.class);
+                .body(SearchCrewResponse.class);
         return Objects.requireNonNull(response).crew();
     }
 }

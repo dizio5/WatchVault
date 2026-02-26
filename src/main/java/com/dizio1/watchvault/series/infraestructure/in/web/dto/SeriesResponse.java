@@ -1,6 +1,6 @@
 package com.dizio1.watchvault.series.infraestructure.in.web.dto;
 
-import com.dizio1.watchvault.movie.infraestructure.in.web.dto.GenreResponse;
+import com.dizio1.watchvault.genre.infraestructure.in.web.dto.GenreResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -20,6 +20,6 @@ public record SeriesResponse(
         LocalDate lastAirDate,
         String status,
         boolean adult,
-        List<GenreResponse>genres
+        List<GenreResponse> genres
 ) {
 }

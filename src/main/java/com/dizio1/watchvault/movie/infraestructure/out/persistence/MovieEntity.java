@@ -11,11 +11,12 @@ import java.util.Set;
 public class MovieEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String originalTitle;
+    private String title;
+
+    private String directedBy;
 
     @Column(nullable = false)
     private String overview;
@@ -32,8 +33,8 @@ public class MovieEntity {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movies_genres",
-        joinColumns = @JoinColumn(name = "movie_id"),
-        inverseJoinColumns = @JoinColumn(name = "genre_id"))
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<GenreEntity> genres = new HashSet<>();
 
     public void addGenre(GenreEntity genre) {
@@ -48,12 +49,20 @@ public class MovieEntity {
         this.id = id;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public String getDirectedBy() {
+        return directedBy;
+    }
+
+    public void setDirectedBy(String directedBy) {
+        this.directedBy = directedBy;
+    }
+
+    public void setTitle(String originalTitle) {
+        this.title = originalTitle;
     }
 
     public String getOverview() {

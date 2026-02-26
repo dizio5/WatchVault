@@ -1,12 +1,11 @@
 package com.dizio1.watchvault.series.infraestructure.out.persistence;
 
-import com.dizio1.watchvault.movie.domain.model.Genre;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.dizio1.watchvault.movie.infraestructure.out.persistence.GenreEntity;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "series")
@@ -23,7 +22,15 @@ public class SeriesEntity {
     private LocalDate lastAirDate;
     private String status;
     private boolean adult;
-    private List<Genre> genres;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(joinColumns = @JoinColumn(name = "series_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private Set<GenreEntity> genres = new HashSet<>();
+
+    public void addGenre(GenreEntity genre) {
+        genres.add(genre);
+    }
 
     public Long getId() {
         return id;
@@ -105,11 +112,11 @@ public class SeriesEntity {
         this.adult = adult;
     }
 
-    public List<Genre> getGenres() {
+    public Set<GenreEntity> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(Set<GenreEntity> genres) {
         this.genres = genres;
     }
 }

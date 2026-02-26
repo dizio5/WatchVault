@@ -1,6 +1,6 @@
 package com.dizio1.watchvault.movie.infraestructure.out.tmdb.dto;
 
-import com.dizio1.watchvault.movie.domain.model.Genre;
+import com.dizio1.watchvault.genre.domain.Genre;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
@@ -15,6 +15,6 @@ public record TmdbMovieResponse(
         @JsonProperty("release_date")
         LocalDate releaseDate,
         boolean adult,
-        List<Genre>genres
+        List<Genre> genres
 ) {
 }
