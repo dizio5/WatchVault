@@ -1,6 +1,6 @@
 package com.dizio1.watchvault.series.infraestructure.in.web.dto;
 
-import com.dizio1.watchvault.movie.infraestructure.in.web.dto.mapper.RestGenreMapper;
+import com.dizio1.watchvault.genre.infraestructure.in.web.dto.RestGenreMapper;
 import com.dizio1.watchvault.series.domain.model.Series;
 import com.dizio1.watchvault.series.infraestructure.out.tmdb.dto.TmdbSeriesSearchResponse;
 import org.springframework.stereotype.Component;

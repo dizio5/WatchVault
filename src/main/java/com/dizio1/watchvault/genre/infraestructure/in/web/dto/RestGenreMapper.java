@@ -1,7 +1,6 @@
-package com.dizio1.watchvault.movie.infraestructure.in.web.dto.mapper;
+package com.dizio1.watchvault.genre.infraestructure.in.web.dto;
 
 import com.dizio1.watchvault.genre.domain.Genre;
-import com.dizio1.watchvault.genre.infraestructure.in.web.dto.GenreResponse;
 import org.springframework.stereotype.Component;
 
 @Component

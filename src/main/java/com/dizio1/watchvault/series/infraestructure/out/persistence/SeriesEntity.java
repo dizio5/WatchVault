@@ -1,6 +1,6 @@
 package com.dizio1.watchvault.series.infraestructure.out.persistence;
 
-import com.dizio1.watchvault.movie.infraestructure.out.persistence.GenreEntity;
+import com.dizio1.watchvault.genre.infraestructure.out.persistence.GenreEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

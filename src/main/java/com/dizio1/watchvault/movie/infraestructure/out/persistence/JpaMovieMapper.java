@@ -1,5 +1,6 @@
 package com.dizio1.watchvault.movie.infraestructure.out.persistence;
 
+import com.dizio1.watchvault.genre.infraestructure.out.persistence.JpaGenreMapper;
 import com.dizio1.watchvault.movie.domain.model.Movie;
 import org.springframework.stereotype.Component;
 

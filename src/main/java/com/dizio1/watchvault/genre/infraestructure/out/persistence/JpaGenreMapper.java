@@ -1,4 +1,4 @@
-package com.dizio1.watchvault.movie.infraestructure.out.persistence;
+package com.dizio1.watchvault.genre.infraestructure.out.persistence;
 
 import com.dizio1.watchvault.genre.domain.Genre;
 import org.springframework.stereotype.Component;
