@@ -1,7 +1,7 @@
 package com.dizio1.watchvault.movie.application.usecase;
 
-import com.dizio1.watchvault.movie.application.ports.out.MovieCatalogPort;
 import com.dizio1.watchvault.movie.application.ports.in.SearchMovieUseCase;
+import com.dizio1.watchvault.movie.application.ports.out.MovieCatalogPort;
 import com.dizio1.watchvault.movie.domain.model.CrewMember;
 import com.dizio1.watchvault.movie.domain.model.Movie;
 
@@ -16,7 +16,7 @@ public class SearchMovieUseCaseImpl implements SearchMovieUseCase {
     }
 
     @Override
-    public Movie getMovieDetails(String title) {
+    public Movie searchMovie(String title) {
         CrewMember director = getMovieDirector(title)
                 .orElseThrow(() -> new IllegalStateException("Director not found"));
 

@@ -7,20 +7,21 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class JpaMovieRepositoryPortAdapter implements MovieRepositoryPort {
+public class JpaMovieRepositoryAdapter implements MovieRepositoryPort {
 
     private final JpaMovieRepository movieRepository;
     private final JpaMovieMapper movieMapper;
 
-    public JpaMovieRepositoryPortAdapter(JpaMovieRepository movieRepository,
-                                         JpaMovieMapper movieMapper) {
+    public JpaMovieRepositoryAdapter(JpaMovieRepository movieRepository,
+                                     JpaMovieMapper movieMapper) {
         this.movieRepository = movieRepository;
         this.movieMapper = movieMapper;
     }
 
     @Override
     public Movie save(Movie movie) {
-        return null;
+        MovieEntity entity = movieRepository.save(movieMapper.toEntity(movie));
+        return movieMapper.toModel(entity);
     }
 
     @Override
