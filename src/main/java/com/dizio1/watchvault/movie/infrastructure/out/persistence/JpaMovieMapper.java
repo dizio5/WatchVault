@@ -4,8 +4,6 @@ import com.dizio1.watchvault.genre.infrastructure.out.persistence.JpaGenreMapper
 import com.dizio1.watchvault.movie.domain.model.Movie;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
-
 @Component
 public class JpaMovieMapper {
 
@@ -36,10 +34,6 @@ public class JpaMovieMapper {
         entity.setId(movie.getId());
         entity.setTitle(movie.getTitle());
         entity.setAdult(movie.isAdult());
-        entity.setGenres(movie.getGenres()
-                .stream()
-                .map(genreMapper::toEntity)
-                .collect(Collectors.toSet()));
         entity.setOverview(movie.getOverview());
         entity.setDirectedBy(movie.getDirectedBy());
         entity.setRuntime(movie.getRuntime());

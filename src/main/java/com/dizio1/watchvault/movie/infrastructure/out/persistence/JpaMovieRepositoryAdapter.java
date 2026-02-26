@@ -1,5 +1,6 @@
 package com.dizio1.watchvault.movie.infrastructure.out.persistence;
 
+import com.dizio1.watchvault.genre.infrastructure.out.persistence.JpaGenreHelper;
 import com.dizio1.watchvault.movie.application.ports.out.MovieRepositoryPort;
 import com.dizio1.watchvault.movie.domain.model.Movie;
 import org.springframework.stereotype.Component;
@@ -11,17 +12,22 @@ public class JpaMovieRepositoryAdapter implements MovieRepositoryPort {
 
     private final JpaMovieRepository movieRepository;
     private final JpaMovieMapper movieMapper;
+    private final JpaGenreHelper genreHelper;
 
     public JpaMovieRepositoryAdapter(JpaMovieRepository movieRepository,
-                                     JpaMovieMapper movieMapper) {
+                                     JpaMovieMapper movieMapper,
+                                     JpaGenreHelper genreHelper) {
         this.movieRepository = movieRepository;
         this.movieMapper = movieMapper;
+        this.genreHelper = genreHelper;
     }
 
     @Override
-    public Movie save(Movie movie) {
-        MovieEntity entity = movieRepository.save(movieMapper.toEntity(movie));
-        return movieMapper.toModel(entity);
+    public Movie registerMovie(Movie movie) {
+        MovieEntity entity = movieMapper.toEntity(movie);
+        entity.setGenres(genreHelper.resolveGenres(movie.getGenres()));
+        MovieEntity saved = movieRepository.save(entity);
+        return movieMapper.toModel(saved);
     }
 
     @Override
@@ -31,8 +37,7 @@ public class JpaMovieRepositoryAdapter implements MovieRepositoryPort {
     }
 
     @Override
-    public Optional<Movie> findByTitle(String title) {
-        return movieRepository.findByTitle(title)
-                .map(movieMapper::toModel);
+    public boolean existsById(Long id) {
+        return movieRepository.existsById(id);
     }
 }

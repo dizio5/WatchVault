@@ -2,7 +2,7 @@ package com.dizio1.watchvault.review.application.ports.in;
 
 import com.dizio1.watchvault.review.domain.Review;
 
-public interface WriteReviewUseCase {
+public interface CreateReviewUseCase {
 
     Review createReview(Review review);
 }

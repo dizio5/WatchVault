@@ -6,7 +6,9 @@ import java.util.Optional;
 
 public interface SeriesRepositoryPort {
 
-    Series save(Series series);
+    Series registerSeries(Series series);
 
     Optional<Series> findByTitle(String title);
+
+    boolean existsById(Long id);
 }
