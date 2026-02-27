@@ -2,9 +2,11 @@ package com.dizio1.watchvault.review.application.usecase;
 
 import com.dizio1.watchvault.movie.application.ports.out.MovieCatalogPort;
 import com.dizio1.watchvault.movie.application.ports.out.MovieRepositoryPort;
+import com.dizio1.watchvault.movie.domain.model.CrewMember;
 import com.dizio1.watchvault.movie.domain.model.Movie;
 import com.dizio1.watchvault.review.application.ports.in.CreateReviewUseCase;
 import com.dizio1.watchvault.review.application.ports.out.ReviewRepositoryPort;
+import com.dizio1.watchvault.review.application.usecase.result.ShowRegistrationResult;
 import com.dizio1.watchvault.review.domain.Review;
 import com.dizio1.watchvault.review.domain.ShowType;
 import com.dizio1.watchvault.series.application.ports.out.SeriesCatalogPort;
@@ -35,32 +37,39 @@ public class CreateReviewUseCaseImpl implements CreateReviewUseCase {
 
     @Override
     public Review createReview(Review review) {
-        Long showId = review.getShowType() == (ShowType.SERIES)
+        ShowRegistrationResult result = review.getShowType() == (ShowType.SERIES)
                 ? registerOrFindSeries(review.getTitle())
                 : registerOrFindMovies(review.getTitle());
-
+        review.setTitle(result.title());
         review.setReviewedAt(LocalDate.now());
-        review.setShowId(showId);
+        review.setShowId(result.id());
         return reviewRepository.registerReview(review);
     }
 
-    private Long registerOrFindSeries(String title) {
+    private ShowRegistrationResult registerOrFindSeries(String title) {
         Series series = seriesCatalog.searchByTitle(title);
 
         if (seriesRepository.existsById(series.getId())) {
-            return series.getId();
+            return new ShowRegistrationResult(series.getId(), series.getTitle());
         }
         Series saved = seriesRepository.registerSeries(series);
-        return saved.getId();
+        return new ShowRegistrationResult(saved.getId(), series.getTitle());
     }
 
-    private Long registerOrFindMovies(String title) {
+    private ShowRegistrationResult registerOrFindMovies(String title) {
         Movie movie = movieCatalog.searchByTitle(title);
 
         if (movieRepository.existsById(movie.getId())) {
-            return movie.getId();
+            return new ShowRegistrationResult(movie.getId(), movie.getTitle());
         }
+        String director = movieCatalog.searchCrewMembers(title)
+                .stream()
+                .filter(crewMember -> crewMember.job().equals("Director"))
+                .findFirst()
+                .map(CrewMember::name)
+                .orElse(null);
+        movie.setDirectedBy(director);
         Movie saved = movieRepository.registerMovie(movie);
-        return saved.getId();
+        return new ShowRegistrationResult(saved.getId(), saved.getTitle());
     }
 }

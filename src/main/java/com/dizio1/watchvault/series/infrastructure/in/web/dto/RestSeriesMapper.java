@@ -21,7 +21,6 @@ public class RestSeriesMapper {
         Series series = new Series();
         series.setTitle(response.name());
         series.setId(response.id());
-        series.setAdult(response.adult());
         series.setOverview(response.overview());
         String creator = Optional.ofNullable(response.createdBy())
                 .stream()
@@ -48,7 +47,6 @@ public class RestSeriesMapper {
                 series.getFirstAirDate(),
                 series.getLastAirDate(),
                 series.getStatus(),
-                series.isAdult(),
                 series.getGenres()
                         .stream()
                         .map(genreMapper::toResponse)

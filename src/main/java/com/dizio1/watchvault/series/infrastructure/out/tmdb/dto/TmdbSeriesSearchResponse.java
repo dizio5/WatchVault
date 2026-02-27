@@ -21,7 +21,7 @@ public record TmdbSeriesSearchResponse(
         @JsonProperty("last_air_date")
         LocalDate lastAirDate,
         String status,
-        boolean adult,
+        Boolean adult,
         List<Genre> genres
 ) {
     public record TmdbCreatorDto(String name) {

@@ -28,7 +28,7 @@ public class TmdbSeriesCatalogAdapter implements SeriesCatalogPort {
         SearchSeriesIdResponse result = tmdb.get()
                 .uri(uriBuilder -> uriBuilder.path("/search/tv")
                         .queryParam("query", query)
-                        .queryParam("include_adult", true)
+                        .queryParam("include_adult", false)
                         .build())
                 .retrieve()
                 .body(SearchSeriesIdResponse.class);

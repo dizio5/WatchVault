@@ -13,7 +13,6 @@ public record MovieResponse(
         String directedBy,
         int runtime,
         LocalDate releaseDate,
-        boolean adult,
         List<GenreResponse> genres
 ) {
 }
