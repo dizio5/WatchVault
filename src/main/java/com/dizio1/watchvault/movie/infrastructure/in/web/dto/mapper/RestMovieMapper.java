@@ -28,7 +28,6 @@ public class RestMovieMapper {
                 movie.getDirectedBy(),
                 movie.getRuntime(),
                 movie.getReleaseDate(),
-                movie.isAdult(),
                 genreResponseList);
     }
 }

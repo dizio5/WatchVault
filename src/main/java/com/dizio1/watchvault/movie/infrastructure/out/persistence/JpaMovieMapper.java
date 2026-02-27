@@ -17,7 +17,6 @@ public class JpaMovieMapper {
         Movie movie = new Movie();
         movie.setId(movieEntity.getId());
         movie.setTitle(movieEntity.getTitle());
-        movie.setAdult(movieEntity.getAdult());
         movie.setDirectedBy(movieEntity.getDirectedBy());
         movie.setGenres(movieEntity.getGenres()
                 .stream()
@@ -33,7 +32,6 @@ public class JpaMovieMapper {
         MovieEntity entity = new MovieEntity();
         entity.setId(movie.getId());
         entity.setTitle(movie.getTitle());
-        entity.setAdult(movie.isAdult());
         entity.setOverview(movie.getOverview());
         entity.setDirectedBy(movie.getDirectedBy());
         entity.setRuntime(movie.getRuntime());

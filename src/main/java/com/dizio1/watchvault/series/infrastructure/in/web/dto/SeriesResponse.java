@@ -19,7 +19,6 @@ public record SeriesResponse(
         @JsonFormat(pattern = "dd-MM-yyyy")
         LocalDate lastAirDate,
         String status,
-        boolean adult,
         List<GenreResponse> genres
 ) {
 }

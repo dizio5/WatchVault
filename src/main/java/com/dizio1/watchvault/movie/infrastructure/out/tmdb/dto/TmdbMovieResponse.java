@@ -14,7 +14,6 @@ public record TmdbMovieResponse(
         int runtime,
         @JsonProperty("release_date")
         LocalDate releaseDate,
-        boolean adult,
         List<Genre> genres
 ) {
 }

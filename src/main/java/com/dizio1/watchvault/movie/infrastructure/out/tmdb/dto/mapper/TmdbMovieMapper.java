@@ -10,7 +10,6 @@ public class TmdbMovieMapper {
     public Movie toModel(TmdbMovieResponse response) {
         Movie movie = new Movie();
         movie.setTitle(response.originalTitle());
-        movie.setAdult(response.adult());
         movie.setGenres(response.genres());
         movie.setOverview(response.overview());
         movie.setRuntime(response.runtime());

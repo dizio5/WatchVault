@@ -5,8 +5,6 @@ import com.dizio1.watchvault.movie.application.ports.out.MovieCatalogPort;
 import com.dizio1.watchvault.movie.domain.model.CrewMember;
 import com.dizio1.watchvault.movie.domain.model.Movie;
 
-import java.util.Optional;
-
 public class SearchMovieUseCaseImpl implements SearchMovieUseCase {
 
     private final MovieCatalogPort movieCatalog;
@@ -17,18 +15,19 @@ public class SearchMovieUseCaseImpl implements SearchMovieUseCase {
 
     @Override
     public Movie searchMovie(String title) {
-        CrewMember director = getMovieDirector(title)
-                .orElseThrow(() -> new IllegalStateException("Director not found"));
+        String director = getMovieDirector(title);
 
         Movie movie = movieCatalog.searchByTitle(title);
-        movie.setDirectedBy(director.name());
+        movie.setDirectedBy(director);
         return movie;
     }
 
-    private Optional<CrewMember> getMovieDirector(String title) {
+    private String getMovieDirector(String title) {
         return movieCatalog.searchCrewMembers(title)
                 .stream()
-                .filter(crewMember -> crewMember.job().equals("Director"))
-                .findFirst();
+                .filter(CrewMember -> CrewMember.job().equals("Director"))
+                .findFirst()
+                .map(CrewMember::name)
+                .orElse(null);
     }
 }

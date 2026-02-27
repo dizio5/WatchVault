@@ -28,9 +28,6 @@ public class MovieEntity {
     @Column(nullable = false)
     private LocalDate releaseDate;
 
-    @Column(nullable = false)
-    private Boolean adult;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movies_genres",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -85,19 +82,23 @@ public class MovieEntity {
         this.releaseDate = releaseDate;
     }
 
-    public Boolean getAdult() {
-        return adult;
-    }
-
-    public void setAdult(Boolean adult) {
-        this.adult = adult;
-    }
-
     public Set<GenreEntity> getGenres() {
         return genres;
     }
 
     public void setGenres(Set<GenreEntity> genres) {
         this.genres = genres;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MovieEntity that)) return false;
+        return id != null && id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

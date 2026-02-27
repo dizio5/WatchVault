@@ -22,7 +22,7 @@ public class SeriesController {
     }
 
     @GetMapping("/search")
-    public SeriesResponse getSeries(@RequestParam String name) {
+    public SeriesResponse searchSeries(@RequestParam String name) {
         Series series = searchSeriesUseCase.searchByTitle(name);
         return seriesMapper.toResponse(series);
     }

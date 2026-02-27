@@ -22,7 +22,6 @@ public class SeriesEntity {
     private LocalDate firstAirDate;
     private LocalDate lastAirDate;
     private String status;
-    private boolean adult;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(joinColumns = @JoinColumn(name = "series_id"),
@@ -99,14 +98,6 @@ public class SeriesEntity {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public boolean isAdult() {
-        return adult;
-    }
-
-    public void setAdult(boolean adult) {
-        this.adult = adult;
     }
 
     public Set<GenreEntity> getGenres() {

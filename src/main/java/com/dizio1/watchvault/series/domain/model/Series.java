@@ -16,7 +16,6 @@ public class Series {
     private LocalDate firstAirDate;
     private LocalDate lastAirDate;
     private String status;
-    private boolean adult;
     private List<Genre> genres;
 
     public Long getId() {
@@ -89,14 +88,6 @@ public class Series {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public boolean isAdult() {
-        return adult;
-    }
-
-    public void setAdult(boolean adult) {
-        this.adult = adult;
     }
 
     public List<Genre> getGenres() {

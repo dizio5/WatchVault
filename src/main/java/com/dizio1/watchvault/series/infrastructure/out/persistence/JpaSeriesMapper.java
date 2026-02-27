@@ -17,7 +17,6 @@ public class JpaSeriesMapper {
         SeriesEntity entity = new SeriesEntity();
         entity.setTitle(series.getTitle());
         entity.setId(series.getId());
-        entity.setAdult(series.isAdult());
         entity.setDescription(series.getOverview());
         entity.setSeasons(series.getSeasons());
         entity.setCreatedBy(series.getCreatedBy());
@@ -41,7 +40,6 @@ public class JpaSeriesMapper {
         series.setFirstAirDate(entity.getFirstAirDate());
         series.setLastAirDate(entity.getLastAirDate());
         series.setStatus(entity.getStatus());
-        series.setAdult(entity.isAdult());
         series.setOverview(entity.getDescription());
         series.setSeasons(entity.getSeasons());
         return series;

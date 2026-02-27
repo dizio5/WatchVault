@@ -11,7 +11,6 @@ public class TmdbCastMapper {
         return new CastMember(
                 response.id(),
                 response.name(),
-                response.adult(),
                 response.gender(),
                 response.character());
     }

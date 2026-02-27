@@ -13,7 +13,6 @@ public class Movie {
     private String directedBy;
     private int runtime;
     private LocalDate releaseDate;
-    private boolean adult;
     private List<Genre> genres;
 
     public Long getId() {
@@ -54,14 +53,6 @@ public class Movie {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public boolean isAdult() {
-        return adult;
-    }
-
-    public void setAdult(boolean adult) {
-        this.adult = adult;
     }
 
     public List<Genre> getGenres() {

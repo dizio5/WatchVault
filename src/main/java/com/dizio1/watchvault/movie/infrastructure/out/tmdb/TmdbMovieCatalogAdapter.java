@@ -36,7 +36,7 @@ public class TmdbMovieCatalogAdapter implements MovieCatalogPort {
                 .uri(uriBuilder -> uriBuilder
                         .path("/search/movie")
                         .queryParam("query", query)
-                        .queryParam("include_adult", true)
+                        .queryParam("include_adult", false)
                         .build())
                 .retrieve()
                 .body(SearchMoviesIdResponse.class);
