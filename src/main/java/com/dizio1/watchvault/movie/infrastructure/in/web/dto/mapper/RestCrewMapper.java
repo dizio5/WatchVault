@@ -9,7 +9,6 @@ public class RestCrewMapper {
 
     public CrewResponse toResponse(CrewMember crewMember) {
         return new CrewResponse(crewMember.name(),
-                crewMember.adult(),
                 crewMember.gender(),
                 crewMember.job(),
                 crewMember.department());

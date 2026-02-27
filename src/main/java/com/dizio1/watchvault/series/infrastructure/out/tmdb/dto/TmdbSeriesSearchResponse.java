@@ -13,15 +13,14 @@ public record TmdbSeriesSearchResponse(
         @JsonProperty("created_by")
         List<TmdbCreatorDto> createdBy,
         @JsonProperty("number_of_seasons")
-        Integer numberOfEpisodes,
-        @JsonProperty("number_of_episodes")
         Integer numberOfSeasons,
+        @JsonProperty("number_of_episodes")
+        Integer numberOfEpisodes,
         @JsonProperty("first_air_date")
         LocalDate firstAirDate,
         @JsonProperty("last_air_date")
         LocalDate lastAirDate,
         String status,
-        Boolean adult,
         List<Genre> genres
 ) {
     public record TmdbCreatorDto(String name) {

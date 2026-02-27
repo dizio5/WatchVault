@@ -9,7 +9,6 @@ public class RestCastMapper {
 
     public CastResponse toResponse(CastMember castMember) {
         return new CastResponse(castMember.name(),
-                castMember.adult(),
                 castMember.gender(),
                 castMember.character());
     }
