@@ -19,7 +19,7 @@ public class MovieEntity {
 
     private String directedBy;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String overview;
 
     @Column(nullable = false)
@@ -31,16 +31,11 @@ public class MovieEntity {
     @Column(nullable = false)
     private Boolean adult;
 
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movies_genres",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<GenreEntity> genres = new HashSet<>();
-
-    public void addGenre(GenreEntity genre) {
-        genres.add(genre);
-    }
 
     public Long getId() {
         return id;

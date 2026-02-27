@@ -14,6 +14,7 @@ public class SeriesEntity {
     @Id
     private Long id;
     private String title;
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
     private String createdBy;
     private Integer episodes;
@@ -27,10 +28,6 @@ public class SeriesEntity {
     @JoinTable(joinColumns = @JoinColumn(name = "series_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<GenreEntity> genres = new HashSet<>();
-
-    public void addGenre(GenreEntity genre) {
-        genres.add(genre);
-    }
 
     public Long getId() {
         return id;

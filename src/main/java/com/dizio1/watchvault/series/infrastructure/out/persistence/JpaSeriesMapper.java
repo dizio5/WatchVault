@@ -4,8 +4,6 @@ import com.dizio1.watchvault.genre.infrastructure.out.persistence.JpaGenreMapper
 import com.dizio1.watchvault.series.domain.model.Series;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
-
 @Component
 public class JpaSeriesMapper {
 
@@ -23,10 +21,6 @@ public class JpaSeriesMapper {
         entity.setDescription(series.getOverview());
         entity.setSeasons(series.getSeasons());
         entity.setCreatedBy(series.getCreatedBy());
-        entity.setGenres(series.getGenres()
-                .stream()
-                .map(genreMapper::toEntity)
-                .collect(Collectors.toSet()));
         entity.setFirstAirDate(series.getFirstAirDate());
         entity.setLastAirDate(series.getLastAirDate());
         entity.setStatus(series.getStatus());
