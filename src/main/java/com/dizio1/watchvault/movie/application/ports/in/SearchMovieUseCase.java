@@ -4,5 +4,5 @@ import com.dizio1.watchvault.movie.domain.model.Movie;
 
 public interface SearchMovieUseCase {
 
-    Movie getMovieDetails(String name);
+    Movie searchMovie(String name);
 }

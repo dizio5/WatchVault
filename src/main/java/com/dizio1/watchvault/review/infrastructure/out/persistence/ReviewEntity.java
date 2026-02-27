@@ -1,11 +1,20 @@
-package com.dizio1.watchvault.review.domain;
+package com.dizio1.watchvault.review.infrastructure.out.persistence;
+
+import com.dizio1.watchvault.review.domain.ShowType;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-public class Review {
+@Entity
+@Table(name = "reviews")
+public class ReviewEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private Long showId;
+    @Enumerated(EnumType.STRING)
     private ShowType showType;
     private String title;
     private String description;
@@ -64,7 +73,7 @@ public class Review {
         return rating;
     }
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
+    public void setRating(Integer stars) {
+        this.rating = stars;
     }
 }

@@ -6,7 +6,9 @@ import java.util.Optional;
 
 public interface MovieRepositoryPort {
 
-    Movie save(Movie movie);
+    Movie registerMovie(Movie movie);
+
     Optional<Movie> findById(Long id);
-    Optional<Movie> findByTitle(String title);
+
+    boolean existsById(Long id);
 }

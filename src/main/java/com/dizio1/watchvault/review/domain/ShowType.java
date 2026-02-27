@@ -5,8 +5,7 @@ import java.util.Arrays;
 public enum ShowType {
 
     SERIES("Series"),
-    MOVIE("Movie"),
-    ANIME("Anime");
+    MOVIE("Movie");
 
     private final String name;
 

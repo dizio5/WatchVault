@@ -1,15 +1,21 @@
-package com.dizio1.watchvault.series.domain.model;
+package com.dizio1.watchvault.series.infrastructure.out.persistence;
 
-import com.dizio1.watchvault.genre.domain.model.Genre;
+import com.dizio1.watchvault.genre.infrastructure.out.persistence.GenreEntity;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Series {
+@Entity
+@Table(name = "series")
+public class SeriesEntity {
 
+    @Id
     private Long id;
     private String title;
-    private String overview;
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String description;
     private String createdBy;
     private Integer episodes;
     private Integer seasons;
@@ -17,7 +23,11 @@ public class Series {
     private LocalDate lastAirDate;
     private String status;
     private boolean adult;
-    private List<Genre> genres;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(joinColumns = @JoinColumn(name = "series_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private Set<GenreEntity> genres = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -35,12 +45,12 @@ public class Series {
         this.title = title;
     }
 
-    public String getOverview() {
-        return overview;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCreatedBy() {
@@ -99,11 +109,11 @@ public class Series {
         this.adult = adult;
     }
 
-    public List<Genre> getGenres() {
+    public Set<GenreEntity> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(Set<GenreEntity> genres) {
         this.genres = genres;
     }
 }
