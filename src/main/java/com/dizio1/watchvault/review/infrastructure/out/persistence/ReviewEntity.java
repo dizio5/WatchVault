@@ -1,6 +1,6 @@
 package com.dizio1.watchvault.review.infrastructure.out.persistence;
 
-import com.dizio1.watchvault.review.domain.ShowType;
+import com.dizio1.watchvault.review.domain.model.ShowType;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

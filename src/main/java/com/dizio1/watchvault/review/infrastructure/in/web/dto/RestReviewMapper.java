@@ -1,7 +1,7 @@
 package com.dizio1.watchvault.review.infrastructure.in.web.dto;
 
-import com.dizio1.watchvault.review.domain.Review;
-import com.dizio1.watchvault.review.domain.ShowType;
+import com.dizio1.watchvault.review.domain.model.Review;
+import com.dizio1.watchvault.review.domain.model.ShowType;
 import org.springframework.stereotype.Component;
 
 @Component

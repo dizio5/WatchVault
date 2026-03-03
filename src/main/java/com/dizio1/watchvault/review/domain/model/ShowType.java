@@ -1,4 +1,6 @@
-package com.dizio1.watchvault.review.domain;
+package com.dizio1.watchvault.review.domain.model;
+
+import com.dizio1.watchvault.review.domain.exception.InvalidShowTypeException;
 
 import java.util.Arrays;
 
@@ -21,6 +23,6 @@ public enum ShowType {
         return Arrays.stream(ShowType.values())
                 .filter(t -> t.name().equalsIgnoreCase(value))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new InvalidShowTypeException(value));
     }
 }

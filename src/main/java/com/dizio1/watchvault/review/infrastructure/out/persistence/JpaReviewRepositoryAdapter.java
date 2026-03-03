@@ -4,7 +4,7 @@ import com.dizio1.watchvault.common.infrastructure.in.web.page.PageMapper;
 import com.dizio1.watchvault.common.infrastructure.in.web.page.PageResult;
 import com.dizio1.watchvault.common.infrastructure.in.web.page.PaginationRequest;
 import com.dizio1.watchvault.review.application.ports.out.ReviewRepositoryPort;
-import com.dizio1.watchvault.review.domain.Review;
+import com.dizio1.watchvault.review.domain.model.Review;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;

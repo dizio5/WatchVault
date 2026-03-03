@@ -5,8 +5,6 @@ import com.dizio1.watchvault.movie.application.ports.out.MovieRepositoryPort;
 import com.dizio1.watchvault.movie.domain.model.Movie;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class JpaMovieRepositoryAdapter implements MovieRepositoryPort {
 
@@ -28,12 +26,6 @@ public class JpaMovieRepositoryAdapter implements MovieRepositoryPort {
         entity.setGenres(genreHelper.resolveGenres(movie.getGenres()));
         MovieEntity saved = movieRepository.save(entity);
         return movieMapper.toModel(saved);
-    }
-
-    @Override
-    public Optional<Movie> findById(Long id) {
-        return movieRepository.findById(id)
-                .map(movieMapper::toModel);
     }
 
     @Override
