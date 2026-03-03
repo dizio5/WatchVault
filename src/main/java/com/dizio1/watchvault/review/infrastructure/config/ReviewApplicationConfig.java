@@ -3,8 +3,10 @@ package com.dizio1.watchvault.review.infrastructure.config;
 import com.dizio1.watchvault.movie.application.ports.out.MovieCatalogPort;
 import com.dizio1.watchvault.movie.application.ports.out.MovieRepositoryPort;
 import com.dizio1.watchvault.review.application.ports.in.CreateReviewUseCase;
+import com.dizio1.watchvault.review.application.ports.in.GetReviewsUseCase;
 import com.dizio1.watchvault.review.application.ports.out.ReviewRepositoryPort;
 import com.dizio1.watchvault.review.application.usecase.CreateReviewUseCaseImpl;
+import com.dizio1.watchvault.review.application.usecase.GetReviewsUseCaseImpl;
 import com.dizio1.watchvault.series.application.ports.out.SeriesCatalogPort;
 import com.dizio1.watchvault.series.application.ports.out.SeriesRepositoryPort;
 import org.springframework.context.annotation.Bean;
@@ -24,5 +26,10 @@ public class ReviewApplicationConfig {
                 movieRepositoryPort,
                 movieCatalogPort,
                 seriesCatalogPort);
+    }
+
+    @Bean
+    GetReviewsUseCase getReviewsUseCase(ReviewRepositoryPort reviewRepositoryPort) {
+        return new GetReviewsUseCaseImpl(reviewRepositoryPort);
     }
 }
