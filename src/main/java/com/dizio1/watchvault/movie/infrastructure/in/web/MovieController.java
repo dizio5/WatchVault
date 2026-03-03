@@ -10,10 +10,6 @@ import com.dizio1.watchvault.movie.infrastructure.in.web.dto.MovieResponse;
 import com.dizio1.watchvault.movie.infrastructure.in.web.dto.mapper.RestCastMapper;
 import com.dizio1.watchvault.movie.infrastructure.in.web.dto.mapper.RestCrewMapper;
 import com.dizio1.watchvault.movie.infrastructure.in.web.dto.mapper.RestMovieMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,32 +49,19 @@ public class MovieController {
     }
 
     @GetMapping("/crew")
-    public Page<CrewResponse> getMovieCrew(@RequestParam String name,
-                                           @PageableDefault Pageable pageable) {
-        List<CrewResponse> crewMembers = searchCrewMembersUseCase.getCrewMembers(name)
+    public List<CrewResponse> getMovieCrew(@RequestParam String name) {
+        return searchCrewMembersUseCase.getCrewMembers(name)
                 .stream()
                 .map(crewMapper::toResponse)
                 .toList();
-
-        return paginate(crewMembers, pageable);
     }
 
     @GetMapping("/cast")
-    public Page<CastResponse> getMovieCast(@RequestParam String name,
-                                           @PageableDefault Pageable pageable) {
-        List<CastResponse> castMembers = searchCastMembersUseCase.getCastMembers(name)
+    public List<CastResponse> getMovieCast(@RequestParam String name) {
+        return searchCastMembersUseCase.getCastMembers(name)
                 .stream()
                 .map(castMapper::toResponse)
                 .toList();
-
-        return paginate(castMembers, pageable);
     }
 
-    private <T> Page<T> paginate(List<T> list, Pageable pageable) {
-        int start = Math.toIntExact(pageable.getOffset());
-        int end = Math.min(start + pageable.getPageSize(), list.size());
-        List<T> pagedList = list.subList(start, end);
-
-        return new PageImpl<>(pagedList, pageable, list.size());
-    }
 }

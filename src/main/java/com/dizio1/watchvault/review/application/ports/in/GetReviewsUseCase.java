@@ -1,12 +1,10 @@
-package com.dizio1.watchvault.review.application.ports.out;
+package com.dizio1.watchvault.review.application.ports.in;
 
 import com.dizio1.watchvault.common.infrastructure.in.web.page.PageQuery;
 import com.dizio1.watchvault.common.infrastructure.in.web.page.PageResult;
 import com.dizio1.watchvault.review.domain.Review;
 
-public interface ReviewRepositoryPort {
+public interface GetReviewsUseCase {
 
-    Review registerReview(Review review);
-
-    PageResult<Review> getAllReviews(PageQuery request);
+    PageResult<Review> getReviews(PageQuery request);
 }
