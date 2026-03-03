@@ -24,6 +24,12 @@ jobs:
           echo "TMDB_TOKEN=${{ secrets.TMDB_TOKEN }}" >> .env
           echo "TMDB_BASE_URL=${{ secrets.TMDB_BASE_URL}}" >> .env
 
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
       - name: Set up docker build
         uses: docker/setup-buildx-action@v3
 
