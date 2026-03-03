@@ -1,7 +1,7 @@
 package com.dizio1.watchvault.review.application.usecase;
 
-import com.dizio1.watchvault.common.infrastructure.in.web.page.PageQuery;
 import com.dizio1.watchvault.common.infrastructure.in.web.page.PageResult;
+import com.dizio1.watchvault.common.infrastructure.in.web.page.PaginationRequest;
 import com.dizio1.watchvault.review.application.ports.in.GetReviewsUseCase;
 import com.dizio1.watchvault.review.application.ports.out.ReviewRepositoryPort;
 import com.dizio1.watchvault.review.domain.Review;
@@ -15,7 +15,7 @@ public class GetReviewsUseCaseImpl implements GetReviewsUseCase {
     }
 
     @Override
-    public PageResult<Review> getReviews(PageQuery request) {
+    public PageResult<Review> getReviews(PaginationRequest request) {
         return reviewRepository.getAllReviews(request);
     }
 }
