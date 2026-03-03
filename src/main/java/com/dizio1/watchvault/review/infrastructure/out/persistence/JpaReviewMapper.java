@@ -1,6 +1,6 @@
 package com.dizio1.watchvault.review.infrastructure.out.persistence;
 
-import com.dizio1.watchvault.review.domain.Review;
+import com.dizio1.watchvault.review.domain.model.Review;
 import org.springframework.stereotype.Component;
 
 @Component

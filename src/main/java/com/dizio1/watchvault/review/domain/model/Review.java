@@ -1,4 +1,4 @@
-package com.dizio1.watchvault.review.domain;
+package com.dizio1.watchvault.review.domain.model;
 
 import java.time.LocalDate;
 

@@ -4,7 +4,7 @@ import com.dizio1.watchvault.common.infrastructure.in.web.page.PageMapper;
 import com.dizio1.watchvault.common.infrastructure.in.web.page.PageResult;
 import com.dizio1.watchvault.review.application.ports.in.CreateReviewUseCase;
 import com.dizio1.watchvault.review.application.ports.in.GetReviewsUseCase;
-import com.dizio1.watchvault.review.domain.Review;
+import com.dizio1.watchvault.review.domain.model.Review;
 import com.dizio1.watchvault.review.infrastructure.in.web.dto.CreateReviewRequest;
 import com.dizio1.watchvault.review.infrastructure.in.web.dto.RestReviewMapper;
 import com.dizio1.watchvault.review.infrastructure.in.web.dto.ReviewResponse;

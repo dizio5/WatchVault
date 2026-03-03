@@ -1,6 +1,6 @@
 package com.dizio1.watchvault.user.domain.model;
 
-import com.dizio1.watchvault.review.domain.Review;
+import com.dizio1.watchvault.review.domain.model.Review;
 
 import java.util.List;
 
