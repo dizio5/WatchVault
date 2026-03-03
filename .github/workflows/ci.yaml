@@ -14,6 +14,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up .env
+        run: |
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "DB_URL=${{ secrets.DB_URL }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "SPRING_PROFILES_ACTIVE=${{ secrets.SPRING_PROFILES_ACTIVE }}" >> .env
+          echo "TMDB_TOKEN=${{ secrets.TMDB_TOKEN }}" >> .env
+          echo "TMDB_BASE_URL=${{ secrets.TMDB_BASE_URL}}" >> .env
+
       - name: Set up docker build
         uses: docker/setup-buildx-action@v3
 
