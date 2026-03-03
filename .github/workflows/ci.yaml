@@ -27,6 +27,9 @@ jobs:
       - name: Set up docker build
         uses: docker/setup-buildx-action@v3
 
+      - name: Run tests
+        run: ./mvnw clean test
+
       - name: Build containers
         run: docker compose build
 
@@ -35,9 +38,6 @@ jobs:
 
       - name: Wait for containers to be ready
         run: sleep 15
-
-      - name: Run tests inside app container
-        run: docker compose exec -T app ./mvnw clean test
 
       - name: Shutdown containers
         if: always()
