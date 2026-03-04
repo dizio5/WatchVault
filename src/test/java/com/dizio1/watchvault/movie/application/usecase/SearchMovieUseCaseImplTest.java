@@ -2,6 +2,7 @@ package com.dizio1.watchvault.movie.application.usecase;
 
 import com.dizio1.watchvault.genre.domain.model.Genre;
 import com.dizio1.watchvault.movie.application.ports.out.MovieCatalogPort;
+import com.dizio1.watchvault.movie.domain.exception.MovieNotFoundException;
 import com.dizio1.watchvault.movie.domain.model.CrewMember;
 import com.dizio1.watchvault.movie.domain.model.Movie;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,7 +34,7 @@ public class SearchMovieUseCaseImplTest {
         movie.setGenres(List.of(new Genre(1L, "Drama"), new Genre(2L, "Comedy")));
         movie.setRuntime(121);
         movie.setReleaseDate(LocalDate.of(2009, 11, 20));
-        movie.setOverview("Uma Thurman feet");
+        movie.setOverview("Uma Thurman dance");
         movie.setTitle("Pulp Fiction");
 
         CrewMember tarantino = new CrewMember(1L,
@@ -61,5 +63,48 @@ public class SearchMovieUseCaseImplTest {
 
         verify(movieCatalog).searchCrewMembers(movie.getTitle());
         verify(movieCatalog).searchByTitle(movie.getTitle());
+    }
+
+    @Test
+    public void searchMovie_givenNonExistingMovie_throwsMovieNotFoundException() {
+        String title = "Unexisting movie";
+
+        when(movieCatalog.searchByTitle(title)).thenThrow(MovieNotFoundException.class);
+
+        assertThrows(MovieNotFoundException.class, () -> searchMovieUseCaseImpl.searchMovie(title));
+
+        verify(movieCatalog).searchByTitle(title);
+        verify(movieCatalog).searchCrewMembers(any());
+    }
+
+    @Test
+    public void searchMovie_givenNoDirector_setsDirectorToNull() {
+        Movie movie = new Movie();
+        movie.setId(1L);
+        movie.setDirectedBy("Quentin Tarantino");
+        movie.setGenres(List.of(new Genre(1L, "Drama"), new Genre(2L, "Comedy")));
+        movie.setRuntime(121);
+        movie.setReleaseDate(LocalDate.of(2009, 11, 20));
+        movie.setOverview("Uma Thurman dance");
+        movie.setTitle("Pulp Fiction");
+
+        CrewMember crewMember = new CrewMember(2L,
+                "John Doe",
+                1,
+                "Make up",
+                "Make Up Artist");
+
+        when(movieCatalog.searchByTitle(movie.getTitle())).thenReturn(movie);
+        when(movieCatalog.searchCrewMembers(movie.getTitle())).thenReturn(List.of(crewMember));
+
+        Movie result = searchMovieUseCaseImpl.searchMovie(movie.getTitle());
+
+        assertNull(result.getDirectedBy());
+        assertEquals(movie.getTitle(), result.getTitle());
+        assertEquals(movie.getGenres(), result.getGenres());
+        assertEquals(movie.getId(), result.getId());
+        assertEquals(movie.getReleaseDate(), result.getReleaseDate());
+        assertEquals(movie.getOverview(), result.getOverview());
+        assertEquals(movie.getRuntime(), result.getRuntime());
     }
 }
