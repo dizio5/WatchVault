@@ -14,8 +14,10 @@ public class ReviewEntity {
     private Long id;
     @Column(nullable = false)
     private Long showId;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ShowType showType;
+    @Column(nullable = false)
     private String title;
     private String description;
     private Integer rating;
