@@ -1,5 +1,16 @@
 spring:
   application:
     name: watchvault
-  profiles:
-    active: dev
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+tmdb:
+  base-url: ${TMDB_BASE_URL}
+  token: ${TMDB_TOKEN}
+security:
+  jwt:
+    secret: ${JWT_SECRET}
